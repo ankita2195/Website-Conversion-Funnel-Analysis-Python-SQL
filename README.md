@@ -219,17 +219,8 @@ Marketing-Funnel-Analysis/
 │   ├── marketing_funnel_analysis.ipynb
 │   └── marketing_funnel_analysis.html
 │
-├── sql/
-│   └── marketing_funnel_analysis.sql
-│
-├── images/
-│   ├── kpi_cards.png
-│   ├── funnel_overview.png
-│   ├── stage_conversion.png
-│   ├── device_analysis.png
-│   └── monthly_analysis.png
-│
-└── requirements.txt
+└── sql/
+   └── marketing_funnel_analysis.sql
 ```
 
 ---
