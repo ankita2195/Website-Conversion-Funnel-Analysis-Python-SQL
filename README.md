@@ -6,13 +6,12 @@ A user-journey analysis of **90,400 users across 5 relational tables** to identi
 
 ## 🚀 Business Impact Snapshot
 
+<img width="1090" height="145" alt="image" src="https://github.com/user-attachments/assets/a2694fd8-210b-450f-b143-767108addd01" />
+
 - Only **452 of 90,400 users converted**, resulting in an overall conversion rate of **0.50%**.
 - **Payment → Confirmation** recorded the highest proportional abandonment at **92.50%**.
 - **Search → Payment** caused the largest absolute loss, with **39,170 users** leaving the funnel.
 - Desktop represented **66.6% of users** but converted at only **0.25%**, compared with **1.00% on Mobile**.
-
-<img width="1090" height="145" alt="image" src="https://github.com/user-attachments/assets/a2694fd8-210b-450f-b143-767108addd01" />
-
 
 ---
 
@@ -122,7 +121,8 @@ Potential areas for investigation include:
 - website performance,
 - checkout-related issues.
 
-<img width="1061" height="569" alt="image" src="https://github.com/user-attachments/assets/61842614-46df-4a0e-918e-6f3d4ca998ea" />
+<img width="1086" height="537" alt="image" src="https://github.com/user-attachments/assets/0ac931b1-800c-41ce-9e0d-39186a489466" />
+
 
 
 ---
@@ -135,7 +135,7 @@ Only **7.50%** of users who reached the Payment stage completed their purchase, 
 
 ### 2. Search → Payment causes the largest volume loss
 
-The business lost **39,170 users** between Search and Payment—the largest absolute drop-off in the funnel.
+The business lost **39,170 users** between Search and Payment, the largest absolute drop-off in the funnel.
 
 ### 3. Desktop is the largest untapped segment
 
@@ -178,28 +178,11 @@ These actions should be prioritised after investigating the more urgent Payment 
 
 ---
 
-## 🧮 SQL Data Model
+## SQL Data Model
 
-The five source tables were consolidated into a reusable user-level view with **one record per user**:
+The five source tables were combined into a reusable user-level SQL view with **one record per user**.
 
-```text
-user_id
-date
-user_month
-sex
-device
-reached_home
-reached_search
-reached_payment
-converted
-drop_off_stage
-```
-
-Additional SQL views were created for:
-
-- overall funnel performance,
-- device-level performance,
-- monthly user-group performance.
+The model included user attributes, funnel-stage indicators, conversion status, and drop-off classification, and was used to create summary views for funnel, device, and monthly performance.
 
 Validation confirmed:
 
@@ -257,6 +240,7 @@ Marketing-Funnel-Analysis/
 - The dataset identifies where users leave, but not why they leave.
 - Payment failures, behavioural data, pricing, campaign sources and customer feedback were unavailable.
 - Recommendations should be validated through technical logs, behavioural analysis and A/B testing.
+- The dataset did not include revenue information, so the financial impact of conversion improvements could not be quantified.
 
 ---
 
