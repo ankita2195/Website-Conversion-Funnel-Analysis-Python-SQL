@@ -219,8 +219,12 @@ Marketing-Funnel-Analysis/
 │   ├── marketing_funnel_analysis.ipynb
 │   └── marketing_funnel_analysis.html
 │
-└── sql/
-   └── marketing_funnel_analysis.sql
+├── sql/
+│  └── marketing_funnel_analysis.sql
+│
+└── reports and presentation/
+   ├── marketing_funnel_analysis_report.pdf
+   └── marketing_funnel_analysis_summary.pdf
 ```
 
 ---
