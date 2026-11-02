@@ -1,4 +1,4 @@
-# Marketing Funnel Analysis | Python, SQL
+# Website Conversion Funnel Analysis | Python, SQL
 
 A user-journey analysis of **90,400 users across 5 relational tables** to identify where customers leave the purchase funnel, which segments are most affected, and where conversion improvements should be prioritised.
 
