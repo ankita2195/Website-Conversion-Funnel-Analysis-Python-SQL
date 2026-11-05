@@ -73,7 +73,7 @@ Business recommendations
 | Search → Payment | 45,200 | 6,030 | 13.34% | 86.66% |
 | Payment → Confirmation | 6,030 | 452 | 7.50% | 92.50% |
 
-<img width="1087" height="546" alt="image" src="https://github.com/user-attachments/assets/3e04dec7-6513-41a0-b7ff-1b02956a84e7" />
+<img width="1100" height="600" alt="newplot (1)" src="https://github.com/user-attachments/assets/88c558d7-e08c-455e-af67-ce7e4a594fce" />
 
 
 ### Key Finding
@@ -216,15 +216,15 @@ Marketing-Funnel-Analysis/
 │   └── payment_confirmation_table.csv
 │
 ├── notebooks/
-│   ├── marketing_funnel_analysis.ipynb
-│   └── marketing_funnel_analysis.html
+│   ├── conversion_funnel_analysis.ipynb
+│   └── conversion_funnel_analysis.html
 │
 ├── sql/
-│  └── marketing_funnel_analysis.sql
+│  └── conversion_funnel_analysis.sql
 │
 └── reports and presentation/
-   ├── marketing_funnel_analysis_report.pdf
-   └── marketing_funnel_analysis_summary.pdf
+   ├── conversion_funnel_analysis_report.pdf
+   └── conversion_funnel_analysis_summary.pdf
 ```
 
 ---
