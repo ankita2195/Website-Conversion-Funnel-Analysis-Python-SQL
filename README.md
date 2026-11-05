@@ -204,7 +204,7 @@ Validation confirmed:
 ## 📁 Repository Structure
 
 ```text
-Marketing-Funnel-Analysis/
+Website-Conversion-Funnel-Analysis/
 │
 ├── README.md
 │
