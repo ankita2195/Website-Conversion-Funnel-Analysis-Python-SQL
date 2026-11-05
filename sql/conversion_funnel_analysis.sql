@@ -3,8 +3,8 @@
 -- =====================================================
 
 -- 1.1 CREATE DATABASE
-CREATE DATABASE IF NOT EXISTS marketing_funnel;
-USE marketing_funnel;
+CREATE DATABASE IF NOT EXISTS conversion_funnel;
+USE conversion_funnel;
 
 
 -- 1.2 CREATE TABLE STRUCTURE
@@ -93,7 +93,7 @@ FROM payment
 UNION ALL
 SELECT 'payment_confirmation', COUNT(*)
 FROM payment_confirmation;
-# The row counts matched the source datasets and the previously validated Python analysis. 
+-- # The row counts matched the source datasets and the previously validated Python analysis. 
 
 
 -- 2.2 MISSING VALUE VALIDATION
@@ -102,7 +102,7 @@ SELECT
     SUM(CASE WHEN sex IS NULL THEN 1 ELSE 0 END) AS null_sex,
     SUM(CASE WHEN device IS NULL THEN 1 ELSE 0 END) AS null_device
 FROM users;
-# No missing values were identified in the required date, device or gender fields.
+-- # No missing values were identified in the required date, device or gender fields.
 
 
 -- 2.3 CATEGORICAL VALUE VALIDATION
@@ -128,8 +128,8 @@ WHERE sex NOT IN ('Male', 'Female')
    OR device NOT IN ('Desktop', 'Mobile')
    OR sex IS NULL
    OR device IS NULL;
-# The demographic fields contained only the expected categories. 
-# Device was limited to Desktop and Mobile, while gender was limited to Male and Female, with no invalid or inconsistent category labels detected.
+-- # The demographic fields contained only the expected categories. 
+-- # Device was limited to Desktop and Mobile, while gender was limited to Male and Female, with no invalid or inconsistent category labels detected.
 
 
 -- 2.4 FUNNEL SEQUENCE VALIDATION
@@ -157,7 +157,7 @@ LEFT JOIN payment p
     ON pc.user_id = p.user_id
 WHERE p.user_id IS NULL;
 # No funnel-order inconsistencies were identified. 
-# Every user recorded at a later stage was also present in the immediately preceding stage, confirming that the stage tables represent a valid sequential funnel.
+-- # Every user recorded at a later stage was also present in the immediately preceding stage, confirming that the stage tables represent a valid sequential funnel.
 
 
 -- 2.5 DATE VALIDATION
@@ -168,8 +168,8 @@ SELECT
     COUNT(DISTINCT DATE_FORMAT(date, '%Y-%m')) AS month_groups,
     SUM(CASE WHEN date IS NULL THEN 1 ELSE 0 END) AS null_dates
 FROM users;
-# The date field contained no missing values and covered the expected analysis period. 
-# The values were stored in a valid SQL date format, allowing users to be grouped consistently into monthly user groups.
+-- # The date field contained no missing values and covered the expected analysis period. 
+-- # The values were stored in a valid SQL date format, allowing users to be grouped consistently into monthly user groups.
 
 
 -- =====================================================
@@ -215,8 +215,8 @@ LEFT JOIN payment p
     ON u.user_id = p.user_id
 LEFT JOIN payment_confirmation pc
     ON u.user_id = pc.user_id;
-# The five source tables were consolidated into a single user-level view containing 
-# demographic attributes, monthly user groups, funnel-stage indicators and user drop-off classifications.
+-- # The five source tables were consolidated into a single user-level view containing 
+-- # demographic attributes, monthly user groups, funnel-stage indicators and user drop-off classifications.
 
 -- 3.2 Preview the view
 SELECT *
@@ -229,7 +229,7 @@ SELECT
     COUNT(*) AS total_rows,
     COUNT(DISTINCT user_id) AS unique_users
 FROM user_funnel;
-# The final view contains one record for each of the 90,400 users, confirming that the joins did not create duplicate rows.
+-- # The final view contains one record for each of the 90,400 users, confirming that the joins did not create duplicate rows.
 
 
 -- 3.4 Validate Drop-off Classification
@@ -239,7 +239,7 @@ SELECT
 FROM user_funnel
 GROUP BY drop_off_stage
 ORDER BY user_count DESC;
-# Each user was assigned to one mutually exclusive funnel outcome.
+-- # Each user was assigned to one mutually exclusive funnel outcome.
 
 
 -- =====================================================
@@ -312,8 +312,8 @@ FROM user_funnel;
 SELECT *
 FROM funnel_summary
 ORDER BY stage_order;
-# The Search → Payment transition accounts for the largest absolute customer loss, while Payment → Confirmation 
-# records the highest proportional abandonment. These two stages should therefore be treated as distinct optimisation priorities.
+-- # The Search → Payment transition accounts for the largest absolute customer loss, while Payment → Confirmation 
+-- # records the highest proportional abandonment. These two stages should therefore be treated as distinct optimisation priorities.
 
 
 -- 4.2 DEVICE FUNNEL SUMMARY VIEW
@@ -347,8 +347,8 @@ GROUP BY device;
 
 SELECT * FROM device_funnel_summary
 ORDER BY overall_conversion_rate DESC;
-# Mobile users achieved a higher overall conversion rate than Desktop users.
-# The stage-level rates indicate that the Desktop funnel should receive greater attention during further investigation and optimisation.
+-- # Mobile users achieved a higher overall conversion rate than Desktop users.
+-- # The stage-level rates indicate that the Desktop funnel should receive greater attention during further investigation and optimisation.
 
 
 -- 4.3 MONTHLY USER-GROUP SUMMARY VIEW
@@ -383,8 +383,8 @@ GROUP BY user_month;
 SELECT *
 FROM monthly_funnel_summary
 ORDER BY user_month;
-# Users associated with the March and April groups exhibited weaker funnel performance than those associated with January and February. 
-# The dataset does not identify the cause, so these differences should be treated as areas for further investigation rather than evidence of a specific time-based decline.
+-- # Users associated with the March and April groups exhibited weaker funnel performance than those associated with January and February. 
+-- # The dataset does not identify the cause, so these differences should be treated as areas for further investigation rather than evidence of a specific time-based decline.
 -- *Note:
 -- Funnel-stage tables do not contain event timestamps.
 -- Monthly comparisons are therefore based on the date recorded
@@ -406,7 +406,7 @@ SELECT
     SUM(converted) AS model_confirmation_users,
     (SELECT COUNT(*) FROM payment_confirmation) AS source_confirmation_users
 FROM user_funnel;
-# Funnel-stage totals from the user-level model matched the original source-table counts, confirming that the transformation preserved all stage records correctly.
+-- # Funnel-stage totals from the user-level model matched the original source-table counts, confirming that the transformation preserved all stage records correctly.
 
 
 -- 5.2 SEGMENT TOTAL VALIDATION
@@ -419,7 +419,7 @@ SELECT
 
     (SELECT COUNT(*)
      FROM user_funnel) AS model_total;
-# Device and monthly user-group views each reconciled to the complete user population, confirming that no users were lost or duplicated during aggregation.
+-- # Device and monthly user-group views each reconciled to the complete user population, confirming that no users were lost or duplicated during aggregation.
 
 -- 5.3 CONVERSION TOTAL VALIDATION
 SELECT
@@ -431,4 +431,4 @@ SELECT
 
     (SELECT SUM(confirmed_users)
      FROM monthly_funnel_summary) AS monthly_confirmed;
-# Confirmed-user totals remained consistent across the user-level model and all analytical views, validating the conversion logic used throughout the SQL pipeline.
+-- # Confirmed-user totals remained consistent across the user-level model and all analytical views, validating the conversion logic used throughout the SQL pipeline.
